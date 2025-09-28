@@ -326,16 +326,14 @@ namespace simpleGUI {
 
 
 
-    std::vector<std::variant<Button, Label>> objectVector;
+    std::vector<Widget> widgetVector;
 
-    inline void updateObjects(bool* runUpdateThread, bool* pauseUpdateThread, std::vector<std::variant<Button, Label>>* objectVectorPtr, Mouse* pMouse) {
+    inline void updateObjects(bool* runUpdateThread, bool* pauseUpdateThread, std::vector<Widget>& widgetVectorPtr, Mouse* pMouse) {
         while (runUpdateThread) {
             if (!*pauseUpdateThread) {
-                for (auto& obj : objectVector) {
-                    std::visit([&](auto& o) {
-                        o.update(pMouse);
-                        o.render();
-                    }, obj);
+                for (Widget& widget : widgetVectorPtr) {
+                    widget.update(pMouse);
+                    widget.render();
                 }
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(250));
@@ -346,7 +344,7 @@ namespace simpleGUI {
     bool pauseUpdateThread   = false;
 
     inline void startUpdateThread() {
-        std::thread updateThread(updateObjects, &updateThreadRunning, &pauseUpdateThread, &objectVector, &mouse);
+        std::thread updateThread(updateObjects, &updateThreadRunning, &pauseUpdateThread, &widgetVector, &mouse);
     }
 }
 
