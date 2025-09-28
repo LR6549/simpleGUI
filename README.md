@@ -18,5 +18,5 @@ Designed for simplicity, **SimpleGui** is ideal for small projects or prototypes
 
 - Integrate **JFLX_Header** libraries for extended functionality.
 - Eventual switch from **SFML 3.0.0** to **SDL3** for broader platform support.
-- Implementation of additional widgets such as **Entries, Images, Menubars**, and more.
+- Implementation of additional widgets such as **Entries, Images, Menubars**, and more. (Keyboard handling)
 - Refinement of current functionality, including **thread management, rendering optimizations**, and general stability improvements.
